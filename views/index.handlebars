@@ -1,4 +1,4 @@
- {{#each articles}}
+ {{#each articles}} {{#unless isSaved}}
 <div class="row">
   <div class="col s12">
 
@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-{{else}}
+{{/unless}} {{else}}
 <p>No Articles to grab</p>
 
 {{/each}}

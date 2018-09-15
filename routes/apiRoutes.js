@@ -77,7 +77,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        res.json(err);
+        res.send(err);
       });
   });
 
@@ -95,7 +95,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        res.json(err);
+        res.send(err);
       });
   });
 
@@ -133,7 +133,7 @@ module.exports = function(app) {
         // If we were able to successfully find Articles, send them back to the client
         data.article = dbArticle;
         res.render('article', data);
-        console.log(dbArticles);
+        
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
@@ -157,7 +157,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        res.json(err);
+        res.send(err);
       });
   });
 
