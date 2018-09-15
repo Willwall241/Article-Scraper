@@ -16,13 +16,11 @@ $(document).ready(function() {
         _id: thisId
       }
     })
-
+    location.reload();
   })
 
   $(".addNote").on("click", function(){
     
-
-
     $.ajax({
       type: "POST",
       dataType: "json",
@@ -32,7 +30,7 @@ $(document).ready(function() {
         created: Date.now()
       }
     })
-
+    location.reload();
   });
 
 
@@ -45,6 +43,19 @@ $(document).ready(function() {
     $(".addNote").data("id", dataId)
     $("#articleId").text(dataId)
 
+  });
+
+  $(".deleteNote").on("click", function() {
+    // Make an AJAX GET request to delete the notes from the db
+    var thisId = $(this).data("id");
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/delete/" + thisId,
+      // On a successful call, clear the #results section
+
+    });
+    location.reload();
   });
   
 

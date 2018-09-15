@@ -160,5 +160,26 @@ module.exports = function(app) {
       });
   });
 
-  app
+  app.get("/delete/:id", function(req, res) {
+    // Remove a note using the objectID
+    db.Note.remove(
+      {
+        _id: req.params.id
+      },
+      function(error, removed) {
+        // Log any errors from mongojs
+        if (error) {
+          console.log(error);
+          res.send(error);
+        }
+        else {
+          // Otherwise, send the mongojs response to the browser
+          // This will fire off the success function of the ajax request
+          console.log(removed);
+          // res.redirect('/saved');
+        }
+        res.redirect('/saved');
+      }
+    );
+  });
 };

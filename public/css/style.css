@@ -30,3 +30,11 @@ main {
   float: right;
   margin-right: 15px;
 }
+
+.note {
+  margin-bottom: 15px;
+}
+
+.deleteNote {
+  margin-left: 15px;
+}
