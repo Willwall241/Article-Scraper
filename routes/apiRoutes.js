@@ -1,17 +1,16 @@
 var db = require('../models');
-var cheerio = require('cheerio');
 
-var request = require('request');
-
+var axios = require("axios");
+var cheerio = require("cheerio");
 
 module.exports = function(app) {
+
   app.get('/scrape', function(req, res) {
     var url = 'https://old.reddit.com';
-    request(url + '/r/aww/', function(error, response, html) {
+    axios.get(url + '/r/aww/').then(function(response){
       // Load the HTML into cheerio and save it to a variable
       // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
-      var $ = cheerio.load(html);
-
+      var $ = cheerio.load(response.data);
       // An empty array to save the data that we'll scrape
       var results = [];
       var result = {};
