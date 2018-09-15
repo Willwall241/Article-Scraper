@@ -2,12 +2,15 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
+var db = require("./models")
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+
 var PORT = process.env.PORT || 8080;
+mongoose.connect(MONGODB_URI);
+mongoose.Promise = Promise;
 
 var app = express();
 
