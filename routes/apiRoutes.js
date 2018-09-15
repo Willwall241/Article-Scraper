@@ -25,13 +25,13 @@ module.exports = function(app) {
         result = {};
         result.title = $(element).text();
 
-        // Find the h4 tag's parent a-tag, and save it's href value as "link" 
-        if ($(element).children().attr('href').startsWith("http:" || "https")) {
-          result.link = $(element).children().attr('href')
-        } 
-        else {
+        // // Find the h4 tag's parent a-tag, and save it's href value as "link" 
+        // if ($(element).children().attr('href').startsWith("http:" || "https")) {
+        //   result.link = $(element).children().attr('href')
+        // } 
+        // else {
         result.link = url + $(element).children().attr('href');
-        }
+        // }
         // result.img = $(".thumbnail").attr()
 
 
