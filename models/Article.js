@@ -22,10 +22,10 @@ var ArticleSchema = new Schema({
     unique: false
   },
 
-  byline: {
+  img: {
     type: String,
     required: false,
-    unique: false
+    unique: true
   },
 
   isSaved: {

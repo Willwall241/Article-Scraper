@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: #444;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.hf-color {
+
+  background: #1473F7;
+}
+
+
+
+.custom-carousel>a>img {
+  max-width: 100%;
+  max-height: 350rem;
+  overflow: hidden;
+}
+
+.container-carousel {
+  margin-top: 5rem;
+}
+
+.buttonFloatRight {
+  float: right;
+  margin-right: 15px;
+}

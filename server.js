@@ -26,7 +26,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+// require("./routes/htmlRoutes")(app);
 
 
 

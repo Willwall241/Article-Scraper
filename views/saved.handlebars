@@ -1,0 +1,61 @@
+ {{#each article}}
+<div class="row">
+  <div class="col s12">
+
+    <div class="card horizontal" data-id={{_id}}>
+      <div class="card-stacked">
+        <div class="card-content">
+          <a href="/article/{{_id}}"><h2>{{title}}</h2></a>
+          <h4>Notes for
+            <div id="articleId">{{_id}}</div>
+            <hr>
+          </h4>
+          {{#each note}}
+          <div class="note">
+            <p>{{text}}</p><button class="btn deleteNote" data-id={{_id}}>Delete</button>
+            
+          </div>
+          {{/each}}
+          <hr>
+        </div>
+        <div class="card-action">
+          <a href="{{link}}">{{link}}</a>
+          <a data-target="modal1" class="buttonFloatRight notesButton btn modal-trigger" data-id={{_id}}>Notes</a>
+          <button class="btn removeSave buttonFloatRight" data-id={{_id}} href="/remove">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/each}}
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Notes for
+      <div id="articleId"></div>
+    </h4>
+    {{#each note}}
+    <div class="note">
+      {{text}}
+      <button class="btn deleteNote" data-id={{_id}}>Delete</button>
+    </div>
+    {{/each}}
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="noteText" class="materialize-textarea"></textarea>
+            <label for="noteText">Textarea</label>
+          </div>
+          <button class="btn waves-effect waves-light addNote" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
