@@ -76,7 +76,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        res.send(err);
+        console.log(err);
       });
   });
 
@@ -94,7 +94,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        res.send(err);
+        console.log(err);
       });
   });
 
@@ -156,7 +156,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        res.send(err);
+        console.log(err);
       });
   });
 
