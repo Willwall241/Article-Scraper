@@ -60,26 +60,26 @@ module.exports = function(app) {
       console.log(results);
       res.redirect('/articles');
       res.finished = true;
-      res.end();
+
     });
   });
 
-  app.get('/articles', function(req, res) {
-    // Grab every document in the Articles collection
-    var data = {};
+  // app.get('/articles', function(req, res) {
+  //   // Grab every document in the Articles collection
+  //   var data = {};
 
-    db.Article.find({})
-      .then(function(dbArticles) {
-        // If we were able to successfully find Articles, send them back to the client
-        data.articles = dbArticles;
-        res.render('index', data);
-        console.log('Articles pulled from database');
-      })
-      .catch(function(err) {
-        // If an error occurred, send it to the client
-        res.json(err);
-      });
-  });
+  //   db.Article.find({})
+  //     .then(function(dbArticles) {
+  //       // If we were able to successfully find Articles, send them back to the client
+  //       data.articles = dbArticles;
+  //       res.render('index', data);
+  //       console.log('Articles pulled from database');
+  //     })
+  //     .catch(function(err) {
+  //       // If an error occurred, send it to the client
+  //       res.json(err);
+  //     });
+  // });
 
   app.get('/saved', function(req, res) {
     // Grab every document in the Articles collection
