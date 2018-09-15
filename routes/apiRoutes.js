@@ -141,7 +141,7 @@ module.exports = function(app) {
   });
 
   app.post('/addNote/:id', function(req, res) {
-    console.log(req.body);
+    
     var articleId = req.params.id;
 
     db.Note.create(req.body)
