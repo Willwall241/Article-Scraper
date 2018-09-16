@@ -28,8 +28,22 @@ $(document).ready(function() {
     location.reload();
   });
 
+  $('.removeSave').on('click', function() {
+    var thisId = $(this).attr('data-id');
+
+    $.ajax({
+      type: 'POST',
+      url: '/unsave/' + thisId,
+      data: {
+        _id: thisId
+      }
+    });
+    location.reload();
+  });
+
   //Add Note to Article
   $('.addNote').on('click', function() {
+    
     $.ajax({
       type: 'POST',
       dataType: 'json',
@@ -40,6 +54,7 @@ $(document).ready(function() {
       }
     });
     location.reload();
+    $("#noteText").empty();
   });
 
 

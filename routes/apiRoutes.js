@@ -20,9 +20,6 @@ module.exports = function(app) {
         result = {};
         // Save the text of the element in a "title" variable
         result.title = $(element).text();
-        // // Find the h4 tag's parent a-tag, and save it's href value as "link"
-        // result.link = url + $(element).children().attr('href');
-        $('');
         console.log('Grabbed Link');
 
         if (
@@ -81,6 +78,7 @@ module.exports = function(app) {
     });
   });
 
+  //Route to pull articles from db
   app.get('/articles', function(req, res) {
     // Grab every document in the Articles collection
     var data = {};
@@ -98,6 +96,7 @@ module.exports = function(app) {
       });
   });
 
+  //Route to pull saved articles from db
   app.get('/saved', function(req, res) {
     // Grab every document in the Articles collection
     var data = {};
@@ -136,7 +135,27 @@ module.exports = function(app) {
         }
       }
     );
-    res.render('article');
+    
+    console.log('Saved');
+  });
+
+  app.post('/unsave/:id', function(req, res) {
+    var thisId = req.params.id;
+
+    db.Article.findOneAndUpdate(
+      { _id: thisId },
+      {
+        $set: { isSaved: false }
+      },
+      function(err) {
+        if (err) {
+          res.json(err);
+        } else {
+          console.log('Updated To Saved');
+        }
+      }
+    );
+    
     console.log('Saved');
   });
 
@@ -147,22 +166,22 @@ module.exports = function(app) {
 
     db.Article.find({ _id: thisId })
       .then(function(dbArticle) {
-        // If we were able to successfully find Articles, send them back to the client
+
         data.article = dbArticle;
         res.render('article', data);
       })
       .catch(function(err) {
-        // If an error occurred, send it to the client
+
         res.json(err);
       });
   });
 
+  //Button
   app.post('/addNote/:id', function(req, res) {
     var articleId = req.params.id;
 
     db.Note.create(req.body)
       .then(function(note) {
-        // If we were able to successfully find Articles, send them back to the client
 
         console.log('Note Created');
         return db.Article.findOneAndUpdate(
@@ -171,11 +190,13 @@ module.exports = function(app) {
         );
       })
       .catch(function(err) {
-        // If an error occurred, send it to the client
+
         res.json(err);
       });
+      res.redirect('/saved')
   });
 
+  //Delete Note
   app.get('/delete/:id', function(req, res) {
     // Remove a note using the objectID
     db.Note.remove(
@@ -183,15 +204,14 @@ module.exports = function(app) {
         _id: req.params.id
       },
       function(error, removed) {
-        // Log any errors from mongojs
+
         if (error) {
           console.log(error);
           res.send(error);
         } else {
-          // Otherwise, send the mongojs response to the browser
-          // This will fire off the success function of the ajax request
+
           console.log('Note Removed');
-          // res.redirect('/saved');
+
         }
       }
     );

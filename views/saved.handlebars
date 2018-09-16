@@ -12,7 +12,7 @@
           </h4>
           {{#each note}}
           <div class="note">
-            <p>{{text}}<button class="btn deleteNote" data-id={{_id}}>Delete</button></p>
+            <h5>{{text}}<button class="btn deleteNote" data-id={{_id}}>Delete</button></h5>
             
           </div>
           
@@ -32,15 +32,15 @@
 
 <div id="modal1" class="modal">
   <div class="modal-content">
-    <h4>Notes</h4>
+    <h4>Enter Note</h4>
     <div class="row">
       <form class="col s12">
         <div class="row">
           <div class="input-field col s12">
             <textarea id="noteText" class="materialize-textarea"></textarea>
-            <label for="noteText">Textarea</label>
+            <label for="noteText">Enter Note Here</label>
           </div>
-          <button class="btn waves-effect waves-light addNote" type="submit" name="action">Submit
+          <button class="btn waves-effect waves-light addNote" type="submit">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
