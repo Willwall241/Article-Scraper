@@ -15,5 +15,4 @@ You may run the application two different ways
       node server.js
     
     Heroku:
-      [Click Here](https://polar-brushlands-56405.herokuapp.com/)
-      
+  [Click Here](https://polar-brushlands-56405.herokuapp.com/)
