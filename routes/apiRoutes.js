@@ -1,13 +1,12 @@
 var db = require('../models');
-
-var axios = require("axios");
-var cheerio = require("cheerio");
+var axios = require('axios');
+var cheerio = require('cheerio');
 
 module.exports = function(app) {
-
+  //Get route initiated through link click("Scape") to pull Headlines from Website
   app.get('/scrape', function(req, res) {
     var url = 'https://old.reddit.com';
-    axios.get(url + '/r/aww/').then(function(response){
+    axios.get(url + '/r/aww/').then(function(response) {
       // Load the HTML into cheerio and save it to a variable
       // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
       var $ = cheerio.load(response.data);
@@ -18,23 +17,43 @@ module.exports = function(app) {
       // With cheerio, find each p-tag with the "title" class
       // (i: iterator. element: the current element)
       $('p.title').each(function(i, element) {
-
-
-        // Save the text of the element in a "title" variable
         result = {};
+        // Save the text of the element in a "title" variable
         result.title = $(element).text();
+        // // Find the h4 tag's parent a-tag, and save it's href value as "link"
+        // result.link = url + $(element).children().attr('href');
+        $('');
+        console.log('Grabbed Link');
 
-        // // Find the h4 tag's parent a-tag, and save it's href value as "link" 
-        // if ($(element).children().attr('href').startsWith("http:" || "https")) {
-        //   result.link = $(element).children().attr('href')
-        // } 
-        // else {
-        result.link = url + $(element).children().attr('href');
-        // }
-        // result.img = $(".thumbnail").attr()
+        if (
+          $(element)
+            .children()
+            .attr('href')
+            .startsWith('http')
+        ) {
+          result.link = $(element)
+            .children()
+            .attr('href');
+        } else {
+          result.link =
+            url +
+            $(element)
+              .children()
+              .attr('href');
+        }
 
-
-
+        if (
+          $(element).parent().parent().parent().find('img').attr('src') != undefined
+        ) {
+          result.img = $(element)
+            .parent()
+            .parent()
+            .parent()
+            .find('img')
+            .attr('src');
+        } else {
+          result.img = "//b.thumbs.redditmedia.com/ISkqazzioofLwnMi8_k9-42BJxW3XeU4EiazfOZjv8o.jpg"
+        }
         // Make an object with data we scraped for this h4 and push it to the results array
         results.push({
           result
@@ -43,15 +62,15 @@ module.exports = function(app) {
         // Save these results in an object that we'll push into the results array we defined earlier
         db.Article.create(result)
           .then(function(dbArticle) {
-            // View the added result in the console
-            console.log(dbArticle);
+            console.log('Article Scrapped');
           })
           .catch(function(err) {
             // If an error occurred, send it to the client
             if (err.code === 11000) {
               console.log('Duplicate Entry');
             } else {
-              console.log(err);
+              res.json(err);
+              JSON.stringify(randomElement);
             }
           });
       });
@@ -59,7 +78,6 @@ module.exports = function(app) {
       console.log(results);
       res.redirect('/articles');
       res.finished = true;
-
     });
   });
 
@@ -76,7 +94,7 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        console.log(err);
+        res.json(err);
       });
   });
 
@@ -89,12 +107,12 @@ module.exports = function(app) {
       .then(function(dbArticles) {
         // If we were able to successfully find Articles, send them back to the client
         data.article = dbArticles;
-        res.render('saved',data);
-        console.log(dbArticles);
+        res.render('saved', data);
+        console.log('Article Saved');
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        console.log(err);
+        res.json(err);
       });
   });
 
@@ -112,9 +130,9 @@ module.exports = function(app) {
       },
       function(err) {
         if (err) {
-          console.log(err);
+          res.json(err);
         } else {
-          console.log('updated' + res);
+          console.log('Updated To Saved');
         }
       }
     );
@@ -132,23 +150,21 @@ module.exports = function(app) {
         // If we were able to successfully find Articles, send them back to the client
         data.article = dbArticle;
         res.render('article', data);
-        
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        console.log(err);
+        res.json(err);
       });
   });
 
   app.post('/addNote/:id', function(req, res) {
-    
     var articleId = req.params.id;
 
     db.Note.create(req.body)
       .then(function(note) {
         // If we were able to successfully find Articles, send them back to the client
 
-        console.log('note created');
+        console.log('Note Created');
         return db.Article.findOneAndUpdate(
           { _id: articleId },
           { $push: { note: note._id } }
@@ -156,11 +172,11 @@ module.exports = function(app) {
       })
       .catch(function(err) {
         // If an error occurred, send it to the client
-        console.log(err);
+        res.json(err);
       });
   });
 
-  app.get("/delete/:id", function(req, res) {
+  app.get('/delete/:id', function(req, res) {
     // Remove a note using the objectID
     db.Note.remove(
       {
@@ -171,14 +187,12 @@ module.exports = function(app) {
         if (error) {
           console.log(error);
           res.send(error);
-        }
-        else {
+        } else {
           // Otherwise, send the mongojs response to the browser
           // This will fire off the success function of the ajax request
-          console.log(removed);
+          console.log('Note Removed');
           // res.redirect('/saved');
         }
-        res.redirect('/saved');
       }
     );
   });

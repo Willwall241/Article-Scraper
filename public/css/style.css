@@ -1,19 +1,29 @@
 body {
+  background-image: url("../img/flower-clouds-meadow.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: #444;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+
 }
 
 main {
   flex: 1 0 auto;
 }
 
-.hf-color {
+nav.hf-color,
+footer.hf-color {
 
-  background: #1473F7;
+  background: rgba(71, 3, 29, .75);
 }
 
+.btn {
+  background: rgba(71, 3, 29, 0.753);
+}
 
 
 .custom-carousel>a>img {
@@ -37,4 +47,20 @@ main {
 
 .deleteNote {
   margin-left: 15px;
+
+}
+
+.top-card {
+  background-color: rgba(71, 3, 29, 0.753);
+}
+
+.card-content > a {
+  color: red;
+}
+
+.articleImg {
+  float: left;
+  width: 200px;
+  height: 200px;
+  padding: 10px;
 }

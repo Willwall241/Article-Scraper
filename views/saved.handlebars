@@ -4,10 +4,10 @@
 
     <div class="card horizontal" data-id={{_id}}>
       <div class="card-stacked">
+        <a href={{link}}><img class="articleImg" src={{img}} alt="Link Image"><h2>{{title}}</h2></a>
         <div class="card-content">
-          <a href="/article/{{_id}}"><h2>{{title}}</h2></a>
-          <h4>Notes for
-            <div id="articleId">{{_id}}</div>
+
+          <h4>Notes
             <hr>
           </h4>
           {{#each note}}
@@ -20,7 +20,6 @@
           <hr>
         </div>
         <div class="card-action">
-          <a href="{{link}}">{{link}}</a>
           <a data-target="modal1" class="buttonFloatRight notesButton btn modal-trigger" data-id={{_id}}>Notes</a>
           <button class="btn removeSave buttonFloatRight" data-id={{_id}} href="/remove">Remove</button>
         </div>

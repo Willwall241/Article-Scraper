@@ -4,20 +4,8 @@
 
     <div class="card horizontal" data-id={{_id}}>
       <div class="card-stacked">
-        <div class="card-content">
-          <a href="/article/"{{_id}}><h2>{{title}}</h2></a>
-          <div id="noteContent">
-            <div class="noteTitle">
-
-            </div>
-            <div class="noteText">
-
-            </div>
-          </div>
-        </div>
+        <a href={{link}}><img class="articleImg" src={{img}} alt="Link Image"><h3>{{title}}</h3></a>
         <div class="card-action">
-          <a href={{link}}>{{link}}</a>
-
           <button class="btn buttonFloatRight save" data-id={{_id}}>Save</button>
         </div>
       </div>
@@ -28,4 +16,3 @@
 <p>No Articles to grab</p>
 
 {{/each}}
-
